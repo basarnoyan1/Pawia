@@ -2,7 +2,7 @@
     package="com.example.takeep_pet">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="takeep_pet"
+        android:label="Pawia"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
