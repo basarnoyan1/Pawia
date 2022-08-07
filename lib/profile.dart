@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:takeep_pet/review.dart';
 import 'package:takeep_pet/tripsnr.dart';
+import 'textplugin.dart';
 
 import 'globals.dart' as globals;
 
@@ -14,8 +15,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScrState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    var owner = globals.owner_name;
-    var pet = globals.pet_name;
+    var owner_wg = globals.owner_name.genitive(true);
+    var pet_wg = globals.pet_name.possessive(true);
     return Scaffold(
         backgroundColor: Color(0xfff6f6f6),
         appBar: AppBar(
@@ -44,7 +45,7 @@ class _ProfileScrState extends State<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            " $owner'nın $pet'sı",
+                            " $owner_wg $pet_wg",
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 18),
                           ),

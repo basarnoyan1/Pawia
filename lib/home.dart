@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart';
+import 'package:intl/intl.dart';
 import 'globals.dart' as globals;
 
 class HomeScreen extends StatefulWidget {
@@ -14,6 +17,41 @@ class _HomeScrState extends State<HomeScreen> {
 
   var temperature = "37.6ºC";
   var tilt = "4º";
+
+  final url =
+      "https://api.turkishairlines.com/test/aodb-rest/searchFlightByFlightNumber";
+
+  void posts() async {
+    try {
+      final now = new DateTime.now();
+      String formatted = DateFormat('yyyyMMdd').format(now);
+      final response = await post(Uri.parse(url),
+          headers: {
+            "Content-type": "application/json",
+            "apikey": "l7xxf90f2f436d3b48bba2a0d0ef5aec7008",
+            "apisecret": "885c340e96ac4c7a9638c021ccbe8a01"
+          },
+          body: jsonEncode({"date": formatted, "flightNumber": "1"}));
+      var responseData = json.decode(response.body)["data"];
+      if (responseData.length < 2) {
+        globals.departure =
+            responseData[0]["scheduledDepartureAirport"].toString();
+        globals.arrival = responseData[0]["scheduledArrivalAirport"].toString();
+        var dep = responseData[0]["actualLocalDepartureDatetime"].toString();
+        globals.deptime = dep.substring(8, 10) + ":" + dep.substring(10);
+        var arr = responseData[0]["estimatedLocalArrivalDatetime"].toString();
+        globals.arrtime = arr.substring(8, 10) + ":" + arr.substring(10);
+      } else {}
+    } catch (err) {
+      print(err);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    posts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -225,71 +263,112 @@ class _HomeScrState extends State<HomeScreen> {
                         ]))),
               ],
             ),
-            SizedBox(
-                height: 130,
-                width: 340,
-                child: Card(
-                    elevation: 0,
-                    color: Color(0xffa8a8a8).withOpacity(0.1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Stack(children: [
+            InkWell(
+                onTap: () {
+                  print("tapped");
+                },
+                child: SizedBox(
+                    height: 180,
+                    width: 340,
+                    child: Card(
+                        elevation: 0,
+                        color: Color(0xffa8a8a8).withOpacity(0.1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Stack(children: [
 //
 //
-                      Positioned(
-                          left: 12,
-                          top: 10,
-                          child: Text("Uçuş durumu: ",
-                              style: TextStyle(color: Color(0xff949494)))),
+                          Positioned(
+                              left: 12,
+                              top: 10,
+                              child: Text("Uçuş durumu: ",
+                                  style: TextStyle(color: Color(0xff949494)))),
 //
-                      Positioned(
-                          left: 107,
-                          top: 10,
-                          child: Text("UÇAKTA",
-                              style: TextStyle(
-                                  color: Color(0xff87d163),
-                                  fontWeight: FontWeight.w700))),
-//
-                      Positioned(
-                          left: 10,
-                          bottom: 10,
-                          child: Text("Kalkış: ",
-                              style: TextStyle(color: Color(0xff949494)))),
-//
-                      Positioned(
-                          left: 55,
-                          bottom: 10,
-                          child: Text("08:23",
-                              style: TextStyle(fontWeight: FontWeight.w700))),
-//
-                      Positioned(
-                          right: 50,
-                          bottom: 10,
-                          child: Text("Varış: ",
-                              style: TextStyle(color: Color(0xff949494)))),
-//
-                      Positioned(
-                          right: 10,
-                          bottom: 10,
-                          child: Text("10:40",
-                              style: TextStyle(fontWeight: FontWeight.w700))),
-//
-                      Positioned(
-                          right: 10,
-                          top: 10,
-                          child: Text("Daha detaylı ",
-                              style: TextStyle(
-                                  color: Color(0xffec1d35),
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12))),
+                          Positioned(
+                              left: 107,
+                              top: 10,
+                              child: Text("UÇAKTA",
+                                  style: TextStyle(
+                                      color: Color(0xff87d163),
+                                      fontWeight: FontWeight.w700))),
+                          //
+                          Positioned(
+                              right: 10,
+                              top: 10,
+                              child: Text("Daha detaylı ",
+                                  style: TextStyle(
+                                      color: Color(0xffec1d35),
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 12))),
 ////
-                      Positioned(
-                          left: 10,
-                          right: 10,
-                          top: 40,
-                          child: Image.asset("assets/flight_status_3.png"))
-                    ]))),
+                          Positioned(
+                              left: 10,
+                              right: 10,
+                              top: 40,
+                              child: Image.asset("assets/flight_status_3.png")),
+//
+                          Positioned(
+                            left: 30,
+                            right: 30,
+                            bottom: 10,
+                            height: 70,
+                            child: Row(
+                              children: <Widget>[
+                                Expanded(
+                                  flex: 3, // 60% of space => (6/(6 + 4))
+                                  child: Container(
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(globals.deplong,
+                                              style: TextStyle(
+                                                  color: Color(0xff949494),
+                                                  fontSize: 11)),
+                                          Text(globals.deptime,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 22)),
+                                          Text(globals.departure,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 15))
+                                        ]),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 4, // 40% of space
+                                  child: Container(
+                                    child: Image.asset("assets/trajectory.png"),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 3, // 40% of space
+                                  child: Container(
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Text(globals.arrlong,
+                                              style: TextStyle(
+                                                  color: Color(0xff949494),
+                                                  fontSize: 11)),
+                                          Text(globals.arrtime,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 22)),
+                                          Text(globals.arrival,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 15))
+                                        ]),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ])))),
           ])
         ]));
   }
