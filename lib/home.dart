@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
+import 'textplugin.dart';
 import 'globals.dart' as globals;
 
 class HomeScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScrState extends State<HomeScreen> {
   String dropdownvalue = globals.pet_name;
+  var drop_gen = globals.pet_name.genitive(true);
   var items = globals.pets;
 
   var temperature = "37.6ºC";
@@ -80,6 +82,7 @@ class _HomeScrState extends State<HomeScreen> {
                     onChanged: (String? newValue) {
                       setState(() {
                         dropdownvalue = newValue.toString();
+                        drop_gen = dropdownvalue.genitive(true);
                         globals.pet_name = newValue.toString();
                       });
                     },
@@ -122,13 +125,13 @@ class _HomeScrState extends State<HomeScreen> {
                                           fontWeight: FontWeight.w700,
                                           fontSize: 12)),
                                   TextSpan(
-                                      text: "$dropdownvalue'nın durumu gayet",
+                                      text: "$drop_gen durumu ",
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 22,
                                           fontWeight: FontWeight.w700)),
                                   TextSpan(
-                                      text: ' iyi',
+                                      text: 'gayet iyi',
                                       style: TextStyle(
                                           color: Color(0xff87d163),
                                           fontSize: 22,

@@ -13,22 +13,22 @@ extension TurkishTools on String {
       indxs.add(this.indexOf(letter));
     });
 
-    var last_vowel = vowels[indxs.indexOf(indxs.reduce(max))];
+    var last_vowel = vowels[indxs.indexOf(indxs.reduce(max)) - 1];
     switch (last_vowel) {
       case "a":
       case "ı":
-        return this + "ın";
+        return result + "ın";
       case "e":
       case "i":
-        return this + "in";
+        return result + "in";
       case "o":
       case "u":
-        return this + "un";
+        return result + "un";
       case "ö":
       case "ü":
-        return this + "ün";
+        return result + "ün";
       default:
-        return this + "ın";
+        return result + "ın";
     }
   }
 
@@ -42,22 +42,22 @@ extension TurkishTools on String {
       indxs.add(this.indexOf(letter));
     });
 
-    var last_vowel = vowels[indxs.indexOf(indxs.reduce(max))];
+    var last_vowel = vowels[indxs.indexOf(indxs.reduce(max)) - 1];
     switch (last_vowel) {
       case "a":
       case "ı":
-        return this + "ı";
+        return result + "ı";
       case "e":
       case "i":
-        return this + "i";
+        return result + "i";
       case "o":
       case "u":
-        return this + "u";
+        return result + "u";
       case "ö":
       case "ü":
-        return this + "ü";
+        return result + "ü";
       default:
-        return this + "ı";
+        return result + "ı";
     }
   }
 }
