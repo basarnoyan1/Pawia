@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:takeep_pet/review.dart';
+import 'package:takeep_pet/tripsnr.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -217,7 +218,7 @@ class _ProfileScrState extends State<ProfileScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ReviewScreen()));
+                            builder: (context) => TripsNRevScreen()));
                   },
                   child: Container(
                       height: 70,

@@ -43,7 +43,8 @@ class _PawState extends State<RatePaw> {
         alignment: Alignment.centerLeft,
         margin: EdgeInsets.only(left: 25, top: 35),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(widget.cont, style: TextStyle(fontSize: 16)),
+          Text(widget.cont,
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
           SizedBox(height: 15),
           RatingBar(
             initialRating: 3,

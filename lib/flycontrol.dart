@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:takeep_pet/notif.dart';
 import 'package:takeep_pet/profile.dart';
 import 'package:takeep_pet/home.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class FlyControl extends StatefulWidget {
   const FlyControl({Key? key}) : super(key: key);
