@@ -26,6 +26,12 @@ class _FlyControlState extends State<FlyControl> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: 1);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
