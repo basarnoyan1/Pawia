@@ -37,6 +37,9 @@ dependencies:
   salomon_bottom_bar: ^3.3.1
   http: ^0.13.5
   flutter_rating_bar: ^4.0.1
+  shared_preferences: ^2.0.15
+  flutter_native_splash: ^2.2.7
+
 
 dev_dependencies:
   flutter_test:
@@ -89,6 +92,9 @@ flutter:
 
       - assets/cal.png
 
+      - assets/tripnrev/lax.png
+      - assets/tripnrev/phx.png
+
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
@@ -112,3 +118,10 @@ flutter:
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/pawia_logo.png
+  branding: assets/thy.png
+  branding_mode: bottom
+  

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:takeep_pet/review.dart';
 import 'package:takeep_pet/tripsnr.dart';
 
+import 'globals.dart' as globals;
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
@@ -12,8 +14,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScrState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    var owner = "Feyza";
-    var pet = "Fanta";
+    var owner = globals.owner_name;
+    var pet = globals.pet_name;
     return Scaffold(
         backgroundColor: Color(0xfff6f6f6),
         appBar: AppBar(

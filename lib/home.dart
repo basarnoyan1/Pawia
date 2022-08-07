@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'globals.dart' as globals;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -8,8 +9,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScrState extends State<HomeScreen> {
-  String dropdownvalue = 'Fanta';
-  var items = ['Fanta', 'Coca-Cola', 'Sprite'];
+  String dropdownvalue = globals.pet_name;
+  var items = globals.pets;
+
+  var temperature = "37.6ºC";
+  var tilt = "4º";
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +42,7 @@ class _HomeScrState extends State<HomeScreen> {
                     onChanged: (String? newValue) {
                       setState(() {
                         dropdownvalue = newValue.toString();
+                        globals.pet_name = newValue.toString();
                       });
                     },
                     isDense: true,
@@ -180,7 +185,7 @@ class _HomeScrState extends State<HomeScreen> {
                               left: 70,
                               top: 35,
                               child: Text(
-                                "37.6ºC",
+                                temperature,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w700, fontSize: 21),
                               )),
@@ -213,7 +218,7 @@ class _HomeScrState extends State<HomeScreen> {
                           Positioned(
                               left: 70,
                               top: 35,
-                              child: Text("4º",
+                              child: Text(tilt,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w700,
                                       fontSize: 21))),
